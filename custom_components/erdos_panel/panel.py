@@ -51,9 +51,23 @@ async def async_setup_panel(hass: HomeAssistant) -> None:
             frontend_dir,
         )
 
-    hass.http.async_register_static_paths(
-        [StaticPathConfig(STATIC_URL_PATH, str(frontend_dir), cache_headers=False)]
-    )
+    try:
+        hass.http.async_register_static_paths(
+            [
+                StaticPathConfig(
+                    url_path=STATIC_URL_PATH,
+                    path=str(frontend_dir),
+                    cache_headers=False,
+                )
+            ]
+        )
+    except Exception:  # noqa: BLE001
+        _LOGGER.exception(
+            "Failed registering static path %s -> %s",
+            STATIC_URL_PATH,
+            frontend_dir,
+        )
+        return
 
     module_url = f"{STATIC_URL_PATH}/panel.js"
     try:
@@ -81,4 +95,8 @@ async def async_setup_panel(hass: HomeAssistant) -> None:
         )
 
     hass.data[DOMAIN]["panel_registered"] = True
-    _LOGGER.info("Registered Erdos Panel sidebar entry at /%s", PANEL_FRONTEND_URL_PATH)
+    _LOGGER.warning(
+        "Registered Erdos Panel sidebar entry at /%s (assets at %s)",
+        PANEL_FRONTEND_URL_PATH,
+        module_url,
+    )
