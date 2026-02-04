@@ -1,0 +1,7 @@
+{
+  "include": ["custom_components"],
+  "exclude": ["**/node_modules", "**/__pycache__", ".git"],
+  "typeCheckingMode": "basic",
+  "reportMissingImports": "none",
+  "reportMissingModuleSource": "none"
+}

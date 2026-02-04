@@ -1,0 +1,19 @@
+{
+  "name": "erdos-panel",
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "packageManager": "pnpm@10.28.2",
+  "scripts": {
+    "dev": "pnpm --filter erdos-panel-frontend dev",
+    "build": "pnpm --filter erdos-panel-frontend build && pnpm run copy:ha",
+    "typecheck": "pnpm --filter erdos-panel-frontend typecheck",
+    "copy:ha": "node scripts/copy-ha-assets.mjs"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}
