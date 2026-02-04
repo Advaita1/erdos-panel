@@ -6,6 +6,7 @@
   "documentation": "https://github.com/Advaita1/erdos-panel",
   "issue_tracker": "https://github.com/Advaita1/erdos-panel/issues",
   "codeowners": ["@Advaita1"],
+  "dependencies": ["http", "panel_custom", "websocket_api"],
   "requirements": [],
   "iot_class": "local_push",
   "single_config_entry": true
